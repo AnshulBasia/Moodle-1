@@ -25,10 +25,10 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 1"));
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 2"));
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 3"));
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 4"));
+        tabLayout.addTab(tabLayout.newTab().setText("Info"));
+        tabLayout.addTab(tabLayout.newTab().setText("Work"));
+        tabLayout.addTab(tabLayout.newTab().setText("Grades"));
+        tabLayout.addTab(tabLayout.newTab().setText("Discuss"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         /*
         mainListView = (ListView) findViewById( R.id.mainListView );
