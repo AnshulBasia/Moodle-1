@@ -45,9 +45,9 @@ public class TabFragment2 extends Fragment {
 
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.tab_fragment_2, container, false);
         // Create an array of string to be data source of the ListFragment
-        String[] datasource={"English","French","Khmer","Japanese","Russian","Chinese"};
+        String[] courses={"English","French","Khmer","Japanese","Russian","Chinese"};
         // Create ArrayAdapter object to wrap the data source
-        ArrayAdapter<String> adapter=new ArrayAdapter<String>(getActivity(),R.layout.rowlayout,R.id.txtitem,datasource);
+        ArrayAdapter<String> adapter=new ArrayAdapter<String>(getActivity(),R.layout.rowlayout,R.id.txtitem,courses);
         // Bind adapter to the ListFragment
         ListView lv = (ListView)rootView.findViewById(R.id.mainListView);
         lv.setAdapter(adapter);
