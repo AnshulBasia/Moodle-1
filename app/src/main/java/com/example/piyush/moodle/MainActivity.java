@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("Tab 1"));
         tabLayout.addTab(tabLayout.newTab().setText("Tab 2"));
         tabLayout.addTab(tabLayout.newTab().setText("Tab 3"));
+        tabLayout.addTab(tabLayout.newTab().setText("Tab 4"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         /*
         mainListView = (ListView) findViewById( R.id.mainListView );
