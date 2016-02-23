@@ -32,12 +32,16 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import android.view.*;
 
 public class MainActivity extends AppCompatActivity {
     private ListView mainListView ;
     private ArrayAdapter<String> listAdapter ;
+
+    ///
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -48,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("Grades"));
         tabLayout.addTab(tabLayout.newTab().setText("Discuss"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
         /*
         mainListView = (ListView) findViewById( R.id.mainListView );
 
@@ -72,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
         mainListView.setAdapter( listAdapter );
 
         */
+
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         final PagerAdapter adapter = new PagerAdapter
                 (getSupportFragmentManager(), tabLayout.getTabCount());
@@ -93,8 +99,22 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-    }
 
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if ((keyCode == KeyEvent.KEYCODE_BACK))
+        {
+            courseslist.assignment_names.clear();
+            courseslist.grades_maximum.clear();
+            courseslist.grades_names.clear();
+            courseslist.grades_score.clear();
+            courseslist.grades_weightage.clear();
+            finish();
+        }
+        return super.onKeyDown(keyCode, event);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -110,5 +130,6 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 
 }

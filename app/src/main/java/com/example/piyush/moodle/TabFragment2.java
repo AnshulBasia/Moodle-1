@@ -1,5 +1,5 @@
 package com.example.piyush.moodle;
-
+import java.util.*;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class TabFragment2 extends Fragment {
     private ListView mainListView ;
@@ -15,7 +16,8 @@ public class TabFragment2 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-
+        Toast.makeText(getActivity(), "called fragment for course "+courseslist.coursecode+" "+courseslist.assignment_names.size(), Toast.LENGTH_SHORT).show();
+        System.out.println("called fragment for course " + courseslist.coursecode + " " + courseslist.assignment_names.size());
         //mainListView = (ListView)getView().findViewById( R.id.mainListView );
         /*
         String[] planets = new String[] { "Mercury", "Venus", "Earth", "Mars",
@@ -42,18 +44,27 @@ public class TabFragment2 extends Fragment {
 
 
         //return inflater.inflate(R.layout.tab_fragment_2, container, false);
-
+        //MainActivity dd= new MainActivity();
+        //dd.get_listassignments();
+        ArrayList<String> assignment_names=courseslist.assignment_names;
+        int n=assignment_names.size();
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.tab_fragment_2, container, false);
         // Create an array of string to be data source of the ListFragment
-        String[] courses={"English","French","Khmer","Japanese","Russian","Chinese"};
+        String[] assignments=new String[n];
+        for(int i=0;i<n;i++)
+        {
+            assignments[i]=assignment_names.get(i);
+        }
+
         // Create ArrayAdapter object to wrap the data source
-        ArrayAdapter<String> adapter=new ArrayAdapter<String>(getActivity(),R.layout.rowlayout,R.id.txtitem,courses);
+        ArrayAdapter<String> adapter=new ArrayAdapter<String>(getActivity(),R.layout.rowlayout,R.id.txtitem,assignments);
         // Bind adapter to the ListFragment
         ListView lv = (ListView)rootView.findViewById(R.id.mainListView);
         lv.setAdapter(adapter);
         //  Retain the ListFragment instance across Activity re-creation
         setRetainInstance(true);
-
+        String asssize="";
+        asssize+=n;
 
         return rootView;
 

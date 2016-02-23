@@ -31,8 +31,8 @@ public class login extends AppCompatActivity {
     public EditText etpassword;
     public String username;
     public String password;
-    public final String IP_ADDRESS = "http://10.203.149.30:8000";
-    public final static String IP_ADDRESS1 = "http://10.203.149.30:8000";
+    public final String IP_ADDRESS = "http://10.192.45.86:8000";
+    public final static String IP_ADDRESS1 = "http://10.192.45.86:8000";
     public String API_LOGIN;
     private static final String SET_COOKIE_KEY = "Set-Cookie";
     private static final String COOKIE_KEY = "Cookie";
@@ -141,15 +141,22 @@ public class login extends AppCompatActivity {
     }
     public void checkuser(View v)
     {
+
         _instance = this;
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        /*
         etname = (EditText) findViewById(R.id.username);
         username = etname.getText().toString();
 
         etpassword = (EditText) findViewById(R.id.password);
         password = etpassword.getText().toString();
+        */
+        username="cs1110200";
+        password="john";
         API_LOGIN = IP_ADDRESS + "/default/login.json?userid=" + username + "&password=" + password;
 
         login();
+
+
     }
 }
