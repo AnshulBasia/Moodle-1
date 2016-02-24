@@ -1,4 +1,5 @@
-Moodle
+Moodle:
+
 A Front-end implementation for the academic curriculum of university.
 
 This app has following features : ○ Login (as a student or faculty)
