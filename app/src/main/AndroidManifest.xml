@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".courseslist" />
-        <activity android:name=".assignmentinfo"></activity>
+        <activity android:name=".assignmentinfo" />
+        <activity android:name=".notification"></activity>
     </application>
 
 </manifest>

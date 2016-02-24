@@ -33,6 +33,7 @@ import android.widget.ListView;
 import android.widget.*;
 public class courseslist extends AppCompatActivity {
     public static String coursecode="";
+    public static String assignment="";
     public final String IP_ADDRESS = login.ipaddress();
     public final String API_COURSES = IP_ADDRESS + "/courses/list.json";
     public  String API_COURSE_GRADES=IP_ADDRESS+"/courses/course.json/"+coursecode+"/grades";
@@ -57,6 +58,10 @@ public class courseslist extends AppCompatActivity {
     public static ArrayList<String> description = new ArrayList();
     public static String[] course_details=new String[4];
     public  String API_LIST_ASSIGNMENTS=login.ipaddress()+"/courses/course.json/"+courseslist.coursecode+"/assignments";
+    public final String API_LIST_COURSE_THREADS=IP_ADDRESS+"/courses/course.json/"+coursecode+"/threads";
+    //public final String API_INFO_THREAD=IP_ADDRESS+"/threads/thread.json/"+threadno;
+    public final String API_ADD_THREAD=login.ipaddress()+"/threads/new.json?title="+" THREAD TITLE 01 "+"&description="+" THREAD DESCRIPTION 01 "+"&course_code="+coursecode;
+    //public final String API_COMMENT_THREAD=IP_ADDRESS+"/threads/post_comment.json?thread_id="+threadid+"&description="+threaddesc;
 
 
     private ListView mainListView ;
@@ -246,5 +251,10 @@ public class courseslist extends AppCompatActivity {
 
         //Intent intent3= new Intent(this, MainActivity.class);
         //startActivity(intent3);
+    }
+    public void gotonotification(View v)
+    {
+        Intent intent=new Intent(this, notification.class);
+        startActivity(intent);
     }
 }

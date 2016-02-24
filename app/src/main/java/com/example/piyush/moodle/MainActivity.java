@@ -1,4 +1,5 @@
 package com.example.piyush.moodle;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -20,6 +21,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -37,8 +39,10 @@ import android.view.*;
 public class MainActivity extends AppCompatActivity {
     private ListView mainListView ;
     private ArrayAdapter<String> listAdapter ;
-
-    ///
+    public static String  ass_name="0";
+    public static String ass_id="0";
+    public static String ass_descriptopn="0";
+    public static String ass_deadline="0";    ///
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -130,6 +134,29 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    public void getassignmentdetails(View v) {
 
+        TextView tv = (TextView) v;
+        //v.setTag("Coursera"+position);
+        String assignmentname = ((TextView) v).getText().toString();
+        ArrayList<String> names=courseslist.assignment_names;
+        ArrayList<String> ids=courseslist.assignment_id;
+        ArrayList<String> deadline=courseslist.deadline;
+        ArrayList<String> description=courseslist.description;
+        for(int i=0;i<names.size();i++)
+        {
+            if(names.get(i).equals(assignmentname))
+            {
+                ass_name=names.get(i);
+                ass_id=ids.get(i);
+                ass_deadline=deadline.get(i);
+                ass_descriptopn=description.get(i);
+                break;
+            }
+        }
+        Intent intent4=new Intent(this,assignmentinfo.class);
+        startActivity(intent4);
+
+    }
 
 }

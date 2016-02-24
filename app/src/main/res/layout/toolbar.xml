@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
+    android:elevation="4dp"
+    >
+    <ImageView
+        android:id="@+id/nothing"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+
+
+        />
+    <ImageView
+    android:id="@+id/logout_logo"
+    android:layout_width="wrap_content"
+    android:layout_height="36dp"
+        android:src="@drawable/logoutlogo"
+android:paddingBottom="1dp"
+        android:onClick="logout"
+    />
+    <ImageView
+        android:id="@+id/notification_logo"
+        android:layout_width="30dp"
+        android:layout_height="40dp"
+        android:src="@drawable/notificationlogo"
+        android:onClick="gotonotification"
+        />
+    </android.support.v7.widget.Toolbar>
