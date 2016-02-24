@@ -23,6 +23,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.EditText;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -37,6 +38,10 @@ import java.util.ArrayList;
 import android.view.*;
 
 public class MainActivity extends AppCompatActivity {
+    public String threadtitle="",threaddesc="";
+    public final String API_ADD_THREAD=login.ipaddress()+"/threads/new.json?title="+threadtitle+"&description="+threaddesc+"&course_code="+courseslist.coursecode;
+    public RequestQueue requestQueue;
+    public SharedPreferences preferences;
     private ListView mainListView ;
     private ArrayAdapter<String> listAdapter ;
     public static String  ass_name="0";
@@ -115,6 +120,9 @@ public class MainActivity extends AppCompatActivity {
             courseslist.grades_names.clear();
             courseslist.grades_score.clear();
             courseslist.grades_weightage.clear();
+            courseslist.threads_createdat.clear();
+            courseslist.threads_desc.clear();
+            courseslist.threads_title.clear();
             finish();
         }
         return super.onKeyDown(keyCode, event);
@@ -157,6 +165,33 @@ public class MainActivity extends AppCompatActivity {
         Intent intent4=new Intent(this,assignmentinfo.class);
         startActivity(intent4);
 
+    }
+    public void post_thread(View v)
+    {
+         EditText newthread1=(EditText)findViewById(R.id.title);
+         EditText newthread2=(EditText)findViewById(R.id.description);
+        threadtitle = newthread1.getText().toString().trim();
+        threaddesc = newthread2.getText().toString().trim();
+        Toast.makeText(MainActivity.this, threaddesc+threadtitle+courseslist.coursecode, Toast.LENGTH_LONG).show();
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue = Volley.newRequestQueue(this);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,API_ADD_THREAD,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(MainActivity.this, "comment posted", Toast.LENGTH_LONG).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(MainActivity.this,error.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        requestQueue.add(stringRequest);
+        //this.recreate();
     }
 
 }

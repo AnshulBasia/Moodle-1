@@ -57,12 +57,14 @@ public class courseslist extends AppCompatActivity {
     public static ArrayList<String> deadline = new ArrayList();
     public static ArrayList<String> description = new ArrayList();
     public static String[] course_details=new String[4];
-    public  String API_LIST_ASSIGNMENTS=login.ipaddress()+"/courses/course.json/"+courseslist.coursecode+"/assignments";
-    public final String API_LIST_COURSE_THREADS=IP_ADDRESS+"/courses/course.json/"+coursecode+"/threads";
+    public  String API_LIST_ASSIGNMENTS=login.ipaddress()+"/courses/course.json/"+coursecode+"/assignments";
+    public  String API_LIST_COURSE_THREADS=IP_ADDRESS+"/courses/course.json/"+coursecode+"/threads";
     //public final String API_INFO_THREAD=IP_ADDRESS+"/threads/thread.json/"+threadno;
     public final String API_ADD_THREAD=login.ipaddress()+"/threads/new.json?title="+" THREAD TITLE 01 "+"&description="+" THREAD DESCRIPTION 01 "+"&course_code="+coursecode;
     //public final String API_COMMENT_THREAD=IP_ADDRESS+"/threads/post_comment.json?thread_id="+threadid+"&description="+threaddesc;
-
+    public static ArrayList<String> threads_title=new ArrayList();
+    public static ArrayList<String> threads_desc=new ArrayList();
+    public static ArrayList<String> threads_createdat=new ArrayList();
 
     private ListView mainListView ;
     private ArrayAdapter<String> listAdapter ;
@@ -241,20 +243,67 @@ public class courseslist extends AppCompatActivity {
         coursecode = ((TextView) v).getText().toString();
         API_LIST_ASSIGNMENTS=login.ipaddress()+"/courses/course.json/"+courseslist.coursecode+"/assignments";
         API_COURSE_GRADES=login.ipaddress()+"/courses/course.json/"+coursecode+"/grades";
+        API_LIST_ASSIGNMENTS=login.ipaddress()+"/courses/course.json/"+coursecode+"/assignments";
+        API_LIST_COURSE_THREADS=IP_ADDRESS+"/courses/course.json/"+coursecode+"/threads";
+
         //Toast.makeText(this, coursecode+"sfdf", Toast.LENGTH_LONG).show();
         course_details=details(coursecode);
         get_listassignments();
         get_course_grades();
-
+        get_course_threads();
         System.out.println(coursecode + assignment_names.size() + " 0");
-        Toast.makeText(this, coursecode+assignment_names.size() + " 0", Toast.LENGTH_SHORT).show();
+    //    Toast.makeText(this, coursecode+assignment_names.size() + " 0", Toast.LENGTH_SHORT).show();
 
         //Intent intent3= new Intent(this, MainActivity.class);
         //startActivity(intent3);
+    }
+    public  void response_course_threads(String json){
+
+
+        try
+        {
+            JSONObject jobject= new JSONObject(json);
+            JSONArray threads=jobject.getJSONArray("course_threads");
+
+            for(int i=0;i<threads.length();i++){
+                JSONObject jo = threads.getJSONObject(i);
+                threads_title.add(jo.getString("title"));
+                threads_desc.add(jo.getString("description"));
+                threads_createdat.add(jo.getString("created_at"));
+
+                //Toast.makeText(MainActivity.get(),threads_title.toString(), Toast.LENGTH_LONG).show();
+                System.out.println("HURRAY");
+            }
+        }
+        catch (org.json.JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    public void get_course_threads(){
+        requestQueue = Volley.newRequestQueue(this);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,API_LIST_COURSE_THREADS,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        response_course_threads(response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(courseslist.this,error.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        requestQueue.add(stringRequest);
     }
     public void gotonotification(View v)
     {
         Intent intent=new Intent(this, notification.class);
         startActivity(intent);
     }
+
 }
